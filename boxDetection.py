@@ -55,7 +55,7 @@ while success:
             image_hash = imagehash.phash(Image.fromarray(masked_out))
             if (lastimagehash == None):
                 lastimagehash = image_hash
-            elif (abs(image_hash - lastimagehash) > 2):
+            elif (abs(image_hash - lastimagehash) > 3):
                 print('saving slide at sec ' + str(sec))
                 cv2.imwrite('boxes/cropped_' + str(count) + '_masked.jpg', masked_out)
                 cv2.imwrite('boxes/cropped_' + str(count) + '.jpg', out)
