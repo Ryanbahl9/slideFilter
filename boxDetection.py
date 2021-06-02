@@ -3,6 +3,8 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import imagehash
+import sys
+
 
 args = []
 if __name__ == "__main__":
@@ -10,12 +12,12 @@ if __name__ == "__main__":
         args.append(arg)
 
 for i in args:
-    print(args[i])
-videoFile = args[0]
+    print(i)
+videoFile = str(args[1])
 
-destDir = args[1]
+destDir = str(args[2])
 
-filterLevel = args[2]
+filterLevel = int(args[3])
 
 vidcap = cv2.VideoCapture(videoFile)
 lastimagehash = None
