@@ -24,6 +24,9 @@ lastimagehash = None
 success,image = vidcap.read()
 
 method = cv2.TM_SQDIFF_NORMED
+im_key1 = cv2.imread('key_1')
+im_key2 = cv2.imread('key_2')
+im_key3 = cv2.imread('key_3')
 
 sec = 0
 frameRate = 0.5
@@ -39,8 +42,8 @@ while success:
 
 
     # Read the images from the file
-    im_key = cv2.imread('key_1')
-    result = cv2.matchTemplate(im_key, image, method)
+    
+    result = cv2.matchTemplate(im_key1, image, method)
     # We want the minimum squared difference
     mn,_,mnLoc,_ = cv2.minMaxLoc(result)
     # MPx,MPy = mnLoc
@@ -58,8 +61,8 @@ while success:
         continue
 
     # Read the images from the file
-    im_key = cv2.imread('key_2')
-    result = cv2.matchTemplate(im_key, image, method)
+    
+    result = cv2.matchTemplate(im_key2, image, method)
     # We want the minimum squared difference
     mn,_,mnLoc,_ = cv2.minMaxLoc(result)
     if (mn < 0.01):
@@ -68,8 +71,8 @@ while success:
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     # Read the images from the file
-    im_key = cv2.imread('key_3')
-    result = cv2.matchTemplate(im_key, image, method)
+    
+    result = cv2.matchTemplate(im_key3, image, method)
     # We want the minimum squared difference
     mn,_,mnLoc,_ = cv2.minMaxLoc(result)
     if (mn < 0.009):
