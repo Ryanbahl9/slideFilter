@@ -30,6 +30,8 @@ frameRate = 0.5
 count = -1
 while success:
     count += 1
+    if (count % 100 == 0):
+        print ("count: " + str(count))
     sec += frameRate
     sec = round(sec, 2)
     vidcap.set(cv2.CAP_PROP_POS_MSEC,sec*1000)
@@ -60,7 +62,7 @@ while success:
     result = cv2.matchTemplate(im_key, image, method)
     # We want the minimum squared difference
     mn,_,mnLoc,_ = cv2.minMaxLoc(result)
-    if (mn < 0.01):
+    if (mn < 0.005):
         continue
 
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -84,31 +86,20 @@ while success:
         x,y,w,h = rect
         area = w * h
         aspect_ratio = w/h
-
-
         if abs(aspect_ratio - (4/3)) < 0.1 and area > 200000:
-            # im_key = cv2.imread('key_2.png')
-            # result = cv2.matchTemplate(im_key, image, method)
-            # # We want the minimum squared difference
-            # mn,_,mnLoc,_ = cv2.minMaxLoc(result)
-            # if (mn > 4):
-            #     break
-
-
             out = image[y:y+h,x:x+w]
             # masking
             mask = np.zeros(out.shape[:2], dtype="uint8")
             cv2.rectangle(mask, (0, h-32), (125, h), 255, -1)
             mask = cv2.bitwise_not(mask)
-            masked_out = cv2.bitwise_and(out,out,mask=mask)
-            
+            masked_out = cv2.bitwise_and(out,out,mask=mask)            
             image_hash = imagehash.phash(Image.fromarray(masked_out))
             if (lastimagehash == None):
                 lastimagehash = image_hash
             elif (abs(image_hash - lastimagehash) > filterLevel):
                 print('saving slide at sec ' + str(sec))
                 cv2.imwrite(destDir + 'cropped_' + str(count) + '.jpg', out)
-                # cv2.imwrite('boxes/cropped_' + str(count) + '.jpg', image)
+                # cv2.imwrite('boxes/cropped_' + str(sec) + '.jpg', image)
                 lastimagehash = image_hash
             break
 
