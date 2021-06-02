@@ -67,6 +67,16 @@ while success:
 
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
+    # Read the images from the file
+    im_key = cv2.imread('key_3')
+    result = cv2.matchTemplate(im_key, image, method)
+    # We want the minimum squared difference
+    mn,_,mnLoc,_ = cv2.minMaxLoc(result)
+    if (mn < 0.009):
+        continue
+
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
     # # show the grayscale image, if you want to show, uncomment 2 below lines
     # cv2.imwrite("gray.jpg",gray)
 
