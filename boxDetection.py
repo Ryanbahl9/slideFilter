@@ -52,7 +52,7 @@ while success:
     # # Display the original image with the rectangle around the match.
     # cv2.imwrite('matched.png',image)
 
-    if (mn < 0.01):
+    if (mn < 0.005):
         continue
 
     # Read the images from the file
