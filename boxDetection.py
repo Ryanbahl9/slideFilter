@@ -37,7 +37,7 @@ while success:
 
 
     # Read the images from the file
-    im_key = cv2.imread('key_1.png')
+    im_key = cv2.imread('key_1')
     result = cv2.matchTemplate(im_key, image, method)
     # We want the minimum squared difference
     mn,_,mnLoc,_ = cv2.minMaxLoc(result)
@@ -56,7 +56,7 @@ while success:
         continue
 
     # Read the images from the file
-    im_key = cv2.imread('key_2.png')
+    im_key = cv2.imread('key_2')
     result = cv2.matchTemplate(im_key, image, method)
     # We want the minimum squared difference
     mn,_,mnLoc,_ = cv2.minMaxLoc(result)
