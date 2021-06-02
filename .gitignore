@@ -1,6 +1,10 @@
 *.png
 *.jpg
 *.mp4
+testing
+boxes
+.vscode
+testing.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
