@@ -54,7 +54,7 @@ while success:
     # # Display the original image with the rectangle around the match.
     # cv2.imwrite('matched.png',image)
 
-    if (mn < 0.005):
+    if (mn < 0.01):
         continue
 
     # Read the images from the file
@@ -62,7 +62,7 @@ while success:
     result = cv2.matchTemplate(im_key, image, method)
     # We want the minimum squared difference
     mn,_,mnLoc,_ = cv2.minMaxLoc(result)
-    if (mn < 0.005):
+    if (mn < 0.01):
         continue
 
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
